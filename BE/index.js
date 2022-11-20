@@ -11,7 +11,7 @@ const workspaceRouter = require('./modules/workspace/workspace.router');
 const backlogRouter = require('./modules/backlog/backlog.router');
 
 
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/Workspace', err => {
+mongoose.connect(process.env.MONGODB_URI , err => { 
   if (err) {
     return console.log('DB connect err', err);
   }
