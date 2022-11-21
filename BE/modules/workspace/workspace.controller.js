@@ -46,12 +46,15 @@ const updateWorkspace = async (req, res) => {
 
 const getWorkspaces = async (req, res) => {
     try {
-        const { adminId } = req.query
-        const workspaces = await WorkspaceModel.find({ 'adminId': adminId }
+        const senderUser = req.user
+
+        // const { adminId } = req.query
+
+        const workspaces = await WorkspaceModel.find({ 'adminId': senderUser }
             // .skip(offset)
             // .limit(limit)
         );
-        const totalWorkspace = await WorkspaceModel.find({ 'adminId': adminId }).countDocuments({});
+        const totalWorkspace = await WorkspaceModel.find({ 'adminId': senderUser }).countDocuments({});
         res.send(
             {
                 success: 1,
