@@ -6,7 +6,9 @@ const createWorkspace = async (req, res) => {
     try {
         // const {existedUser} = req.user;
         // console.log(existedUser);
-        const { name, type, adminId } = req.body;
+        const senderUser = req.user
+        const adminId = senderUser._id
+        const { name, type } = req.body;
 
         const newWorkspace = await WorkspaceModel.create({
             name, type, adminId
@@ -19,7 +21,7 @@ const createWorkspace = async (req, res) => {
 }
 const deleteWorkspace = async (req, res) => {
     try {
-        const { workspaceId } = req.params;
+        const { workspaceId } = req.query;
 
         const deleteWorkspace = await WorkspaceModel
             .findByIdAndDelete(workspaceId);

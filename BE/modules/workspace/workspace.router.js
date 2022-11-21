@@ -8,7 +8,7 @@ router.post('/create', needAuthenticated, workspaceController.createWorkspace);
 router.get('/:workspaceId', needAuthenticated, workspaceController.getWorkspace);
 router.get('/', needAuthenticated, workspaceController.getWorkspaces);
 router.put('/:workspaceId', needAuthenticated, workspaceController.updateWorkspace);
-router.delete('/:workspaceId', needAuthenticated, workspaceController.deleteWorkspace);
+router.delete('/', needAuthenticated, workspaceController.deleteWorkspace);
 
 
 module.exports = router;

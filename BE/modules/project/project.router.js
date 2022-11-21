@@ -5,10 +5,10 @@ const needAuthenticated = require('../../middlewares/needAuthenticated')
 const projectController = require('./project.controller');
 
 router.post('/create',needAuthenticated,  projectController.createProject);
-router.get('/:taskId',needAuthenticated, projectController.getProject);
+router.get('/:projectId',needAuthenticated, projectController.getProject);
 router.get('/',needAuthenticated, projectController.getProjects);
-router.put('/:taskId',needAuthenticated, projectController.updateProject);
-router.delete('/:taskId',needAuthenticated, projectController.deleteProject);
+router.put('/:projectId',needAuthenticated, projectController.updateProject);
+router.delete('/:projectId',needAuthenticated, projectController.deleteProject);
 
-
+ 
 module.exports = router;
