@@ -5,32 +5,7 @@ require('dotenv').config();
 
 const createTask = async (req, res) => {
     try {
-        //     const token = req.headers.authorization;
 
-        // if (!token) {
-        //   throw new Error('Not found token');
-        // }
-
-        // // const jwtToken = token.split(' ')[1];
-        // // check token có thuộc token của dự án mình ko
-        // // check token có hết hạn hay ko
-        // // trả về payload
-
-        // const data = jwt.verify(token, process.env.SECRET_KEY);
-
-        // const { userId } = data;
-        // if (!userId) {
-        //   throw new Error('Authorization fail');
-        // }
-        // console.log(data);
-
-        // const existedUser = await UserModel.findById(userId);
-
-        // if (!existedUser) {
-        //   throw new Error('Authorization fail');
-        // }
-
-        // console.log(token);
         // const senderUser = req.user
 
         const { title, description, status, assignee, reporter, startTime, endTime, projectID } = req.body;
@@ -39,13 +14,11 @@ const createTask = async (req, res) => {
             title,
             description,
             status,
+            projectID,
             assignee,
             reporter,
             startTime,
             endTime,
-            projectID
-
-
             //   createdBy: existedUser._id,
         });
 
@@ -67,6 +40,18 @@ const deleteTask = async (req, res) => {
     }
 }
 
+const updateStatusTask = async (req, res) => {
+    try {
+        const { status, taskId } = req.body
+        const updateStatusTask = await TaskModel.findByIdAndUpdate(taskId, status, { new: true })
+
+        res.send({ success: 1 })
+
+    } catch (error) {
+        res.status(400).send({ success: 1 })
+    }
+}
+
 const updateTask = async (req, res) => {
     try {
         const { taskId } = req.params;
@@ -81,13 +66,18 @@ const updateTask = async (req, res) => {
     }
 }
 
+
 const getTasks = async (req, res) => {
     try {
-        const tasks = await (await TaskModel
+
+        const { projectId, status } = req.query;
+        const tasks = await TaskModel
             .find({})
+            .where('projectID', projectId  )
+            .where('status', status  )
             // .skip(offset)
             // .limit(limit)
-        );
+            ;
         const totalTasks = await TaskModel.countDocuments({});
         res.send(
             {
@@ -118,4 +108,4 @@ const getTask = async (req, res) => {
     }
 }
 
-module.exports = { createTask, deleteTask, updateTask, getTasks, getTask }
+module.exports = { createTask, deleteTask, updateTask, getTasks, getTask, updateStatusTask }

@@ -11,7 +11,7 @@ const TaskSchema = new mongoose.Schema({
     },
     status: {
         type: String,
-        default: "in progress"
+
     },
     // backlogID: {
     //     type: mongoose.Types.ObjectId,
@@ -37,7 +37,6 @@ const TaskSchema = new mongoose.Schema({
     },
     endTime: {
         type: Date,
-
     },
 
 },

@@ -1,25 +1,38 @@
 const CommentModel = require('./comment');
 const TaskModel = require('../Task/task');
+const UserModel = require('../auth/user');
+
 
 
 const createComment = async (req, res) => {
     try {
         // const {existedUser} = req.user;
         // console.log(existedUser);
+        const senderUser = req.user
+        const createdBy = senderUser._id
+        // const user = userId.toString()
+        console.log(createdBy);
+        // if(userId === null || userId === undefined) {
+        //     throw new Error('Authorization fail')
+        // }
         const {
             content,
             taskId,
-            createdBy } = req.body;
+             } = req.body;
 
         const searchTask = await TaskModel.findById(taskId);
 
         console.log(searchTask);
 
-        const newComment = await CommentModel.create({
+        const data = {
             content,
             taskId,
-            createdBy
-        });
+            createdById: createdBy._id
+        }
+
+        const newComment = await CommentModel.create(
+            data
+        );
 
         res.send({ success: 1, data: newComment });
     } catch (error) {
@@ -28,10 +41,22 @@ const createComment = async (req, res) => {
 }
 const deleteComment = async (req, res) => {
     try {
-        const { commentId } = req.params;
+        const senderUser = req.user
+        const userId = senderUser._id
 
-        const deleteComment = await CommentModel
-            .findByIdAndDelete(commentId);
+        if(userId === null || userId === undefined) {
+            throw new Error('Authorization fail')
+        }
+        const { commentId } = req.params;
+        const comment = await CommentModel
+            .findById(commentId);
+        
+
+        // const createdUser = await UserModel.findById(comment.createdBy)
+        if(comment.createdBy === userId){
+            const deleteComment = await CommentModel
+                .findByIdAndDelete(commentId);
+        }
 
         res.send({ success: 1 });
     } catch (err) {

@@ -21,6 +21,7 @@ const createWorkspace = async (req, res) => {
 }
 const deleteWorkspace = async (req, res) => {
     try {
+        
         const { workspaceId } = req.query;
 
         const deleteWorkspace = await WorkspaceModel

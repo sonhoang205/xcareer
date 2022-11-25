@@ -10,9 +10,10 @@ const CommentSchema = new mongoose.Schema({
     required: true,
     ref:"Task"
   },
-  createdBy: {
+  createdById: {
     type: mongoose.Types.ObjectId,
-    ref:"User"
+    require: true,
+    // ref:"User"
   }
 }, {
   timestamps: true

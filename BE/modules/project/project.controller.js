@@ -52,11 +52,11 @@ const getProjects = async (req, res) => {
         const { workspaceId } = req.query
 
 
-        const projects = await (await ProjectModel
+        const projects = await ProjectModel
             .find({ 'workspaceId': workspaceId })
             // .skip(offset)
             // .limit(limit)
-        );
+        ;
         const totalProject = await ProjectModel.find({ 'workspaceId': workspaceId }).countDocuments({});
         res.send(
             {
