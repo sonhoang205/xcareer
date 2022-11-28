@@ -1,7 +1,7 @@
 require('dotenv').config()
 const express = require('express');
 const mongoose = require('mongoose');
-const cors = require('cors')
+
 const authRouter = require('./modules/auth/auth.router');
 const projectRouter = require('./modules/project/project.router');
 const sprintRouter = require('./modules/Sprint/sprint.router');
@@ -9,7 +9,6 @@ const taskRouter = require('./modules/Task/task.router');
 const commentRouter = require('./modules/comment/comment.router');
 const workspaceRouter = require('./modules/workspace/workspace.router');
 const backlogRouter = require('./modules/backlog/backlog.router');
-
 
 
 mongoose.connect(process.env.MONGODB_URI , err => { 
@@ -21,7 +20,6 @@ mongoose.connect(process.env.MONGODB_URI , err => {
 
 const app = express();
 app.use(express.json());
-app.use(cors());
 
 app.use('/api/auth', authRouter);
 app.use('/api/sprint', sprintRouter);
