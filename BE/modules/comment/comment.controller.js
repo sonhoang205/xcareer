@@ -1,6 +1,7 @@
 const CommentModel = require('./comment');
 const TaskModel = require('../Task/task');
-const UserModel = require('../auth/user');
+// const UserModel = require('../auth/user');
+
 
 
 
@@ -18,7 +19,7 @@ const createComment = async (req, res) => {
         const {
             content,
             taskId,
-             } = req.body;
+        } = req.body;
 
         const searchTask = await TaskModel.findById(taskId);
 
@@ -41,22 +42,22 @@ const createComment = async (req, res) => {
 }
 const deleteComment = async (req, res) => {
     try {
-        const senderUser = req.user
-        const userId = senderUser._id
+        // const senderUser = req.user
+        // const userId = senderUser._id
 
-        if(userId === null || userId === undefined) {
-            throw new Error('Authorization fail')
-        }
+        // if (userId === null || userId === undefined) {
+        //     throw new Error('Authorization fail')
+        // }
         const { commentId } = req.params;
-        const comment = await CommentModel
-            .findById(commentId);
-        
+        // const comment = await CommentModel
+        //     .findById(commentId);
+
 
         // const createdUser = await UserModel.findById(comment.createdBy)
-        if(comment.createdBy === userId){
-            const deleteComment = await CommentModel
-                .findByIdAndDelete(commentId);
-        }
+        // if(comment.createdBy === userId){
+        const deleteComment = await CommentModel
+            .findByIdAndDelete(commentId);
+        // }
 
         res.send({ success: 1 });
     } catch (err) {
