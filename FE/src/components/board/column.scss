@@ -1,0 +1,138 @@
+.column {
+    flex: 0 0 auto;
+    width: 300px;
+    height: 580px;
+    margin-left: 20px;
+    >* {
+        background-color: #ebecf0;
+        color: #333;
+        padding: 0 8px;
+    }
+    .column-drag-handle {
+        display: flex;
+        padding-left: 20px;
+        height: 43px;
+        line-height: 40px;
+        font-size: 26px;
+        font-weight: bold;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+        overflow: hidden;
+        align-items: center;
+        .title-header {
+            flex: 90%;
+            overflow: hidden;
+            overflow-x: auto;
+        }
+    }
+    .status {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        color: gray;
+        height: 40px;
+        .icon {
+            color: blue;
+            cursor: pointer;
+        }
+    }
+    .option {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex: 10%;
+        z-index: 9999;
+        gap: 20px;
+        height: 40px;
+        // &:hover {
+        //     color: rgb(78, 63, 63);
+        // }
+        .reporter {
+            font-size: 20px;
+        }
+        button.Dropdown {
+            padding: 10px 10px;
+            font-size: 18px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            background-color: #ebecf0;
+            color: black;
+            line-height: 30px;
+            height: 30px;
+            border-color: #ebecf0;
+            outline: none !important;
+            box-shadow: none !important;
+            &::after {
+                content: "...";
+                border: none;
+            }
+        }
+        span {
+            line-height: 26px;
+            font-size: 30px;
+        }
+    }
+    footer {
+        padding-left: 10px;
+        height: 30px;
+        line-height: 32px;
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+        cursor: pointer;
+        background-color: greenyellow;
+    }
+    ul {
+        list-style-type: none;
+        margin: 0;
+        max-height: calc(100% - 36px - 36px);
+        overflow-y: auto;
+        li {
+            // background-color: rgb(241, 237, 229);
+            background-color: white;
+            padding: 10px 0;
+            border-radius: 2px;
+            margin-bottom: 10px;
+            p {
+                padding: 0 10px;
+            }
+            &:last-child {
+                // thuoc tinh nay ko danh cho phan tu cuoi cung
+                margin-bottom: 10px;
+            }
+            .card-item_header {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                border-bottom: 1px solid #ebecf0;
+                padding: 0 10px;
+                border-bottom-left-radius: 10px;
+                border-bottom-right-radius: 10px;
+                span {
+                    font-size: 20px;
+                }
+            }
+        }
+    }
+    .column-drag-handle {
+        cursor: pointer;
+    }
+    .col-drop-preview {
+        background-color: rgba(150, 150, 200, 0.1);
+        border: 1px dashed #abc;
+        margin: 5px 45px 5px 5px;
+    }
+    .card-list {
+        cursor: pointer;
+        .card-ghost {
+            transition: transform 0.18s ease;
+            transform: rotateZ(6deg);
+            font-weight: 600;
+            color: #333;
+        }
+        .card-ghost-drop {
+            transition: transform 0.18s ease-in-out;
+            transform: rotateZ(0deg);
+            font-weight: 600;
+        }
+    }
+}
