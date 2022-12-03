@@ -8,7 +8,8 @@ const sprintRouter = require('./modules/Sprint/sprint.router');
 const taskRouter = require('./modules/Task/task.router');
 const commentRouter = require('./modules/comment/comment.router');
 const workspaceRouter = require('./modules/workspace/workspace.router');
-const backlogRouter = require('./modules/backlog/backlog.router');
+const memberRouter = require('./modules/member/member.router');
+
 
 
 mongoose.connect(process.env.MONGODB_URI , err => { 
@@ -27,7 +28,8 @@ app.use('/api/project', projectRouter);
 app.use('/api/task', taskRouter);
 app.use('/api/comment', commentRouter);
 app.use('/api/workspace', workspaceRouter);
-app.use('/api/backlog', backlogRouter);
+app.use('/api/member', memberRouter);
+
 
 app.use('*', (req, res) => {
   res.send({ message: '404 not found' })
