@@ -10,6 +10,7 @@ router.get('/', needAuthenticated, taskController.getTasks);
 router.put('/:taskId', needAuthenticated, taskController.updateTask);
 router.put('/updatestatus', needAuthenticated, taskController.updateStatusTask);
 router.delete('/:taskId', needAuthenticated, taskController.deleteTask);
+router.delete('/', taskController.deleteAllTask);
 
 
 module.exports = router;

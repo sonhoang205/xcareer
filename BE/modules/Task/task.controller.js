@@ -27,6 +27,16 @@ const createTask = async (req, res) => {
         res.send({ success: 0, data: null, message: error.message })
     }
 }
+const deleteAllTask = async (req, res) => {
+    try {
+        const deleteAllTask = await TaskModel.deleteMany({})
+
+        res.send({ success: 1 })
+    } catch (error) {
+        res.send({ success: 0, message: error.message })
+
+    }
+}
 const deleteTask = async (req, res) => {
     try {
         const { taskId } = req.params;
@@ -73,12 +83,16 @@ const getTasks = async (req, res) => {
         const { projectId, status } = req.query;
         const tasks = await TaskModel
             .find({})
-            .where('projectID', projectId  )
-            .where('status', status  )
+            .where('projectID', projectId)
+            .where('status', status)
             // .skip(offset)
             // .limit(limit)
             ;
-        const totalTasks = await TaskModel.countDocuments({});
+        const totalTasks = await TaskModel
+            .find({})
+            .where('projectID', projectId)
+            .where('status', status)
+            .countDocuments({});
         res.send(
             {
                 success: 1,
@@ -108,4 +122,4 @@ const getTask = async (req, res) => {
     }
 }
 
-module.exports = { createTask, deleteTask, updateTask, getTasks, getTask, updateStatusTask }
+module.exports = { createTask, deleteTask, updateTask, getTasks, getTask, updateStatusTask , deleteAllTask}

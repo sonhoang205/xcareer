@@ -5,8 +5,9 @@ require('dotenv').config();
 
 const createProject = async (req, res) => {
     try {
-
-        const { name, type, workspaceId, lead } = req.body;
+        const senderUser = req.user
+        const lead = senderUser._id
+        const { name, type, workspaceId } = req.body;
 
         const newProject = await ProjectModel.create({
             name,
@@ -49,11 +50,13 @@ const updateProject = async (req, res) => {
 
 const getProjects = async (req, res) => {
     try {
+        const senderUser = req.user
+        const userId = senderUser._id
         const { workspaceId } = req.query
 
 
         const projects = await ProjectModel
-            .find({ 'workspaceId': workspaceId })
+            .find({  }).where({'workspaceId': workspaceId}).where({'lead': userId})
             // .skip(offset)
             // .limit(limit)
         ;
