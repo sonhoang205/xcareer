@@ -88,11 +88,7 @@ const getTasks = async (req, res) => {
             // .skip(offset)
             // .limit(limit)
             ;
-        const totalTasks = await TaskModel
-            .find({})
-            .where('projectID', projectId)
-            .where('status', status)
-            .countDocuments({});
+        const totalTasks = await tasks.countDocuments({});
         res.send(
             {
                 success: 1,

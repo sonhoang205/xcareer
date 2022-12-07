@@ -6,8 +6,9 @@ const memberController = require('./member.controller');
 
 router.post('/add', memberController.addMember);
 router.delete('/kick', memberController.kickMember);
+router.get('/:projectId', memberController.getMembers);
+router.get('/', memberController.getMember);
 
-// router.get('/:taskId', needAuthenticated, taskController.getTask);
 // router.get('/', needAuthenticated, taskController.getTasks);
 // router.put('/:taskId', needAuthenticated, taskController.updateTask);
 // router.put('/updatestatus', needAuthenticated, taskController.updateStatusTask);
