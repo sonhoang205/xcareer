@@ -1,5 +1,5 @@
 const TaskModel = require('./task');
-const jwt = require('jsonwebtoken');
+
 
 require('dotenv').config();
 
@@ -58,7 +58,7 @@ const updateStatusTask = async (req, res) => {
         res.send({ success: 1 })
 
     } catch (error) {
-        res.status(400).send({ success: 1 })
+        res.status(400).send({ success: 0, message: error.message })
     }
 }
 
@@ -72,7 +72,7 @@ const updateTask = async (req, res) => {
 
         res.send({ success: 1, data: updatedTask });
     } catch (err) {
-        res.status(400).send({ success: 0, data: null });
+        res.status(400).send({ success: 0, data: null, message: err.message });
     }
 }
 
@@ -82,23 +82,24 @@ const getTasks = async (req, res) => {
 
         const { projectId, status } = req.query;
         const tasks = await TaskModel
-            .find({})
-            .where('projectID', projectId)
-            .where('status', status)
+            .find({'projectID': projectId, 'status': status})
             // .skip(offset)
             // .limit(limit)
             ;
-        const totalTasks = await tasks.countDocuments({});
+        // const totalTasks = await TaskModel
+        //     .find({})
+        //     .where('projectID', projectId)
+        //     .where('status', status).countDocuments({});
         res.send(
             {
                 success: 1,
                 data: {
                     tasks: tasks,
-                    total: totalTasks
+                    // total: totalTasks
                 }
             });
-    } catch (err) {
-        res.status(400).send({ success: 0, data: [] });
+    } catch (error) {
+        res.status(400).send({ success: 0, message: error.message });
     }
 }
 
@@ -114,8 +115,8 @@ const getTask = async (req, res) => {
                 data: task
             });
     } catch (err) {
-        res.status(400).send({ success: 0, data: [] });
+        res.status(400).send({ success: 0, data: [], message: err.message });
     }
 }
 
-module.exports = { createTask, deleteTask, updateTask, getTasks, getTask, updateStatusTask , deleteAllTask}
+module.exports = { createTask, deleteTask, updateTask, getTasks, getTask, updateStatusTask, deleteAllTask }

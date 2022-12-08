@@ -3,15 +3,15 @@ const MemberModel = require('./member');
 const addMember = async (req, res) => {
     try {
 
-        const senderUser = req.user
+        const senderUser = req.user 
         const {
             userId,
             projectId
         } = req.body;
 
-        const findMember = await MemberModel.find({}).where('userId', userId).where('projectId', projectId)
+        const findMember = await MemberModel.find({'userId': userId,'projectId': projectId })
 
-        if (findMember == undefined || findMember == null) {
+        if (findMember.length === 0) {
             const newMember = await MemberModel.create({
                 userId,
                 projectId
@@ -22,7 +22,7 @@ const addMember = async (req, res) => {
         throw new Error('User da trong nay roi')
 
     } catch (error) {
-        res.send({ success: 0, data: null, message: error.message })
+        res.send({ success: 0, message: error.message })
     }
 }
 const kickMember = async (req, res) => {
@@ -39,7 +39,7 @@ const kickMember = async (req, res) => {
 }
 const getMembers = async (req, res) => {
     try {
-        const { projectId } = req.query;
+        const { projectId } = req.params;
 
         const members = await MemberModel.find({ 'projectId': projectId })
 

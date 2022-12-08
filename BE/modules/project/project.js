@@ -19,6 +19,7 @@ const ProjectSchema = new mongoose.Schema({
         ref:"User",
         require: true
     },
+
 },
     {
         // tự động thêm createdAt, updatedAt
