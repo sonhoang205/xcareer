@@ -84,7 +84,10 @@ const login = async (req, res) => {
 
 const seeUsers = async (req, res) => {
   try {
-    const allUsers = await UserModel.find({});
+    const { offset, limit } = req.params
+    const allUsers = await UserModel.find({})
+      .skip(offset)
+      .limit(limit);
     res.send({ success: 1, data: allUsers });
   } catch (error) {
     res.status(400).send({ success: 0, data: [] });
