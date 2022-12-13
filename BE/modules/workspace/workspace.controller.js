@@ -2,6 +2,8 @@
 const UserModel = require('../auth/user');
 const WorkspaceModel = require('./workspace')
 
+const MemberModel = require('../member/member')
+
 const createWorkspace = async (req, res) => {
     try {
         // const {existedUser} = req.user;
@@ -93,4 +95,16 @@ const getWorkspace = async (req, res) => {
     }
 }
 
+const getProjectsMember = async (req, res) =>{
+    try {
+        const senderUser = req.user
+        const userId = senderUser._id
+        
+        const projectsMember = await MemberModel.find({'userId' : userId})
+
+
+    } catch (error) {
+        
+    }
+}
 module.exports = { createWorkspace, deleteWorkspace, updateWorkspace, getWorkspace, getWorkspaces }

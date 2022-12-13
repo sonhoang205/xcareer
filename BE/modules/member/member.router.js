@@ -8,6 +8,7 @@ router.post('/add', memberController.addMember);
 router.delete('/kick', memberController.kickMember);
 router.get('/:projectId', memberController.getMembers);
 router.get('/', memberController.getMember);
+// router.get('/:userId', memberController.getProjectsMember);
 
 // router.get('/', needAuthenticated, taskController.getTasks);
 // router.put('/:taskId', needAuthenticated, taskController.updateTask);

@@ -1,7 +1,9 @@
 require('dotenv').config()
 const express = require('express');
 const mongoose = require('mongoose');
-const cors = require('cors')
+const cors = require('cors');
+
+
 
 const authRouter = require('./modules/auth/auth.router');
 const projectRouter = require('./modules/project/project.router');
@@ -10,6 +12,7 @@ const taskRouter = require('./modules/Task/task.router');
 const commentRouter = require('./modules/comment/comment.router');
 const workspaceRouter = require('./modules/workspace/workspace.router');
 const memberRouter = require('./modules/member/member.router');
+const uploadRouter = require('./modules/upload/upload.router');
 
 
 
@@ -32,6 +35,7 @@ app.use('/api/task', taskRouter);
 app.use('/api/comment', commentRouter);
 app.use('/api/workspace', workspaceRouter);
 app.use('/api/member', memberRouter);
+app.use('/api/upload', uploadRouter);
 
 
 app.use('*', (req, res) => {

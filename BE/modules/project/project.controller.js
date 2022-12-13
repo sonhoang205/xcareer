@@ -1,6 +1,8 @@
 const ProjectModel = require('./project');
 const jwt = require('jsonwebtoken');
 
+const MemberModel = require('../member/member')
+
 require('dotenv').config();
 
 const createProject = async (req, res) => {
@@ -61,6 +63,7 @@ const getProjects = async (req, res) => {
             // .limit(limit)
         ;
         const totalProject = await ProjectModel.find({ 'workspaceId': workspaceId }).countDocuments({});
+        console.log(typeof projects);
         res.send(
             {
                 success: 1,
