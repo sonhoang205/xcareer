@@ -25,7 +25,8 @@ mongoose.connect(process.env.MONGODB_URI , err => {
 
 const app = express();
 app.use(express.json());
-app.use(cors())
+app.use(cors());
+app.use(express.static('uploads'));
 
 
 app.use('/api/auth', authRouter);
