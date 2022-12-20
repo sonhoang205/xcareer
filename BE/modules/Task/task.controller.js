@@ -1,6 +1,7 @@
 const TaskModel = require('./task');
 
 
+
 require('dotenv').config();
 
 const createTask = async (req, res) => {
@@ -52,10 +53,11 @@ const deleteTask = async (req, res) => {
 
 const updateStatusTask = async (req, res) => {
     try {
-        const { status, taskId } = req.body
-        const updateStatusTask = await TaskModel.findByIdAndUpdate(taskId, status, { new: true })
 
-        res.send({ success: 1 })
+        const { status, taskId } = req.body
+        const updateStatusTask = await TaskModel.findByIdAndUpdate({ _id: taskId }, { status: status }, { new: true })
+
+        res.send({ success: 1, data: updateStatusTask })
 
     } catch (error) {
         res.status(400).send({ success: 0, message: error.message })
@@ -64,15 +66,25 @@ const updateStatusTask = async (req, res) => {
 
 const updateTask = async (req, res) => {
     try {
+
         const { taskId } = req.params;
         const dataUpdateTask = req.body;
 
         const updatedTask = await TaskModel
             .findByIdAndUpdate(taskId, dataUpdateTask, { new: true });
-
         res.send({ success: 1, data: updatedTask });
     } catch (err) {
         res.status(400).send({ success: 0, data: null, message: err.message });
+    }
+}
+const updateFile = async (req, res) => {
+    try {
+        const { taskId, fileName } = req.query;
+
+        const updateFileName = await TaskModel.findByIdAndUpdate(taskId, { fileName: fileName }, { new: true })
+        res.send({ success: 1, })
+    } catch (error) {
+        res.send({ success: 0, data: null, message: error.message })
     }
 }
 
@@ -82,7 +94,7 @@ const getTasks = async (req, res) => {
 
         const { projectId, status } = req.query;
         const tasks = await TaskModel
-            .find({'projectID': projectId, 'status': status})
+            .find({ 'projectID': projectId, 'status': status })
             // .skip(offset)
             // .limit(limit)
             ;
@@ -119,4 +131,4 @@ const getTask = async (req, res) => {
     }
 }
 
-module.exports = { createTask, deleteTask, updateTask, getTasks, getTask, updateStatusTask, deleteAllTask }
+module.exports = { createTask, deleteTask, updateTask, getTasks, getTask, updateStatusTask, deleteAllTask, updateFile }

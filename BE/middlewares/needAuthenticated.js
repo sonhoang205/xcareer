@@ -4,10 +4,11 @@ const jwt = require('jsonwebtoken');
 
 async function needAuthenticated(req, res, next) {
     try {
-
+        
         const token = req.headers.authorization;
-
+        console.log('test auth');
         if (!token) {
+            console.log('Not found token');
             throw new Error('Not found token');
         }
         const jwtToken = token.split(' ')[1];
@@ -24,14 +25,15 @@ async function needAuthenticated(req, res, next) {
 
         const existedUser = await UserModel.findById(userId);
 
-        if (!existedUser) {
-            throw new Error('Authorization fail');
-        }
+        // if (!existedUser) {
+        //     throw new Error('Authorization fail');
+        // }
         //nhet them thong tin vao bien req
         req.user = existedUser;
 
         next()
     } catch (error) {
+        console.log(error);
         res.status(400).send({ success: 0, message: error })
     }
 }

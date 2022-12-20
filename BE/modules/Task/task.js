@@ -38,6 +38,9 @@ const TaskSchema = new mongoose.Schema({
     endTime: {
         type: Date,
     },
+    fileName:{
+        type: String,
+    }
 
 },
     {
