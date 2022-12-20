@@ -1,5 +1,6 @@
 const CommentModel = require('./comment');
 const TaskModel = require('../Task/task');
+const UserModel = require('../auth/user')
 // const UserModel = require('../auth/user');
 
 
@@ -87,6 +88,7 @@ const getComments = async (req, res) => {
             // .skip(offset)
             // .limit(limit)
         );
+
         const totalComment = await CommentModel.find({ 'taskId': taskId }).countDocuments({});
         res.send(
             {

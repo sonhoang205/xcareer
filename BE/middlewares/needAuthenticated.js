@@ -17,17 +17,17 @@ async function needAuthenticated(req, res, next) {
         // check token có hết hạn hay ko
         // trả về payload
         const data = jwt.verify(jwtToken, process.env.SECRET_KEY);
-
+        console.log(data);
         const { userId } = data;
         if (!userId) {
             throw new Error('Authorization fail');
         }
 
         const existedUser = await UserModel.findById(userId);
-
-        // if (!existedUser) {
-        //     throw new Error('Authorization fail');
-        // }
+        console.log(userId);
+        if (!existedUser) {
+            throw new Error('Authorization fail');
+        }
         //nhet them thong tin vao bien req
         req.user = existedUser;
 

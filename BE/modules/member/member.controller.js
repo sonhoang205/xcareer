@@ -32,7 +32,7 @@ const kickMember = async (req, res) => {
         const { userId, projectId } = req.query;
 
         const kickMember = await MemberModel
-            .deleteOne({ 'userId': userId, 'projectId': projectId })
+            .deleteMany({ 'userId': userId, 'projectId': projectId });
 
         res.send({ success: 1 });
     } catch (error) {
