@@ -94,17 +94,33 @@ const getWorkspace = async (req, res) => {
         res.status(400).send({ success: 0, data: [], message: err.message });
     }
 }
-
-const getProjectsMember = async (req, res) =>{
+const getAllWorkspaces = async (req, res) => {
     try {
-        const senderUser = req.user
-        const userId = senderUser._id
-        
-        const projectsMember = await MemberModel.find({'userId' : userId})
 
+        const totalWorkspaces = await WorkspaceModel
+            .find({}).countDocuments();
 
-    } catch (error) {
-        
+        res.send(
+            {
+                success: 1,
+                data: totalWorkspaces
+
+            });
+    } catch (err) {
+        res.status(400).send({ success: 0, data: [], message: err.message });
     }
 }
-module.exports = { createWorkspace, deleteWorkspace, updateWorkspace, getWorkspace, getWorkspaces }
+
+// const getProjectsMember = async (req, res) =>{
+//     try {
+//         const senderUser = req.user
+//         const userId = senderUser._id
+        
+//         const projectsMember = await MemberModel.find({'userId' : userId})
+
+
+//     } catch (error) {
+        
+//     }
+// }
+module.exports = {getAllWorkspaces, createWorkspace, deleteWorkspace, updateWorkspace, getWorkspace, getWorkspaces }

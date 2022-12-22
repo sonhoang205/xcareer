@@ -92,5 +92,21 @@ const getProject = async (req, res) => {
         res.status(400).send({ success: 0, data: [], message: err.message });
     }
 }
+const getAllProject = async (req, res) => {
+    try {
+        
+        const allProjects = await ProjectModel
+            .find({}).countDocuments()
+        ;
+        res.send(
+            {
+                success: 1,
+                data: allProjects
+            });
+    } catch (err) {
+        res.status(400).send({ success: 0, data: [], message: err.message });
+    }
+}
 
-module.exports = { createProject, deleteProject, updateProject, getProject, getProjects }
+
+module.exports = { getAllProject, createProject, deleteProject, updateProject, getProject, getProjects }

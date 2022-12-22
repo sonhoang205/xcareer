@@ -17,6 +17,11 @@ const UserSchema = new mongoose.Schema({
   //   type: String,
   //   required:true
   // },
+  admin: {
+    type: Boolean,
+    require: true,
+    default: false
+  }
 
 }, {
   // tự động thêm createdAt, updatedAt

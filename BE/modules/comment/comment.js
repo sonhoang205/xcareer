@@ -14,6 +14,10 @@ const CommentSchema = new mongoose.Schema({
     type: mongoose.Types.ObjectId,
     require: true,
     // ref:"User"
+  },
+  username:{
+    type: String,
+
   }
 }, {
   timestamps: true

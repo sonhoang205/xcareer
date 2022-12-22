@@ -130,5 +130,21 @@ const getTask = async (req, res) => {
         res.status(400).send({ success: 0, data: [], message: err.message });
     }
 }
+const getAllTask = async (req, res) => {
+    try {
+        const totalTask = await TaskModel
+            .find({}).countDocuments()
+        ;
+        res.send(
+            {
+                success: 1,
+                data: totalTask
+            });
+    } catch (err) {
+        res.status(400).send({ success: 0, data: [], message: err.message });
+    }
+}
 
-module.exports = { createTask, deleteTask, updateTask, getTasks, getTask, updateStatusTask, deleteAllTask, updateFile }
+
+
+module.exports = {getAllTask, createTask, deleteTask, updateTask, getTasks, getTask, updateStatusTask, deleteAllTask, updateFile }

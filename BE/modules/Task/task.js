@@ -13,13 +13,6 @@ const TaskSchema = new mongoose.Schema({
         type: String,
 
     },
-    // backlogID: {
-    //     type: mongoose.Types.ObjectId,
-    //     require: true
-    // },
-    // sprintID: {
-    //     type: mongoose.Types.ObjectId
-    // },
     projectID: {
         type: mongoose.Types.ObjectId
     },

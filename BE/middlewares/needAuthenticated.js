@@ -6,7 +6,7 @@ async function needAuthenticated(req, res, next) {
     try {
         
         const token = req.headers.authorization;
-        console.log('test auth');
+        // console.log('test auth');
         if (!token) {
             console.log('Not found token');
             throw new Error('Not found token');

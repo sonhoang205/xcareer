@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 
 const register = async (req, res) => {
   try {
-    const { username, password, name } = req.body;
+    const { username, password, name, admin } = req.body;
     const existedUser = await UserModel.findOne({ username });
 
     if (existedUser) {
@@ -18,7 +18,8 @@ const register = async (req, res) => {
     const newUser = await UserModel.create({
       name,
       username,
-      password: hashPassword
+      password: hashPassword,
+      admin
     });
 
     // send => JSON.stringify({})

@@ -29,7 +29,8 @@ const createComment = async (req, res) => {
         const data = {
             content,
             taskId,
-            createdById: createdBy._id
+            createdById: createdBy._id,
+            username: senderUser.username
         }
 
         const newComment = await CommentModel.create(
@@ -88,7 +89,7 @@ const getComments = async (req, res) => {
             // .skip(offset)
             // .limit(limit)
         );
-
+        
         const totalComment = await CommentModel.find({ 'taskId': taskId }).countDocuments({});
         res.send(
             {
