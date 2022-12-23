@@ -82,7 +82,7 @@ const updateFile = async (req, res) => {
         const { taskId, fileName } = req.query;
 
         const updateFileName = await TaskModel.findByIdAndUpdate(taskId, { fileName: fileName }, { new: true })
-        res.send({ success: 1, })
+        res.send({ success: 1, updateFileName})
     } catch (error) {
         res.send({ success: 0, data: null, message: error.message })
     }
