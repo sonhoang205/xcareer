@@ -45,7 +45,7 @@ app.use('*', (req, res) => {
 
 app.use((err,req,res,next)=>{
   console.error(err.stack);
-  res.status.send({success:0,message:err.message})
+  res.send({success:0,message:err.message})
 })
 
 app.listen(process.env.PORT || 9090, (err) => {
